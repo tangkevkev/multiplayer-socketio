@@ -1,0 +1,32 @@
+.news-box {
+    text-align: center;
+    margin-top: 5vh;
+    background-color: #f8f8f8;
+    border: 1px solid #d3d2d2;
+    padding: 1vh;
+    border-radius: 2px;
+    min-width: 300px;
+    border-radius: 10px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.news-about {
+    line-height: 1.5em;
+    margin-bottom: 2.5em;
+    text-align: justify;
+    font-family: verdana;
+    font-size: 0.8em;
+    background-color: #d2f7c3;
+    border: 1px solid #d3d2d2;
+    border-radius: 2px;
+    padding: 1vh;
+}
+
+@media screen and (min-width: 1000px) {
+    .news-box {
+        margin-left: unset;
+        margin-right: auto;
+    }
+}
