@@ -15,11 +15,25 @@ export const JoinBox = () => {
 
     const socket: Socket = useContext(SocketContext).getSocket()
     const [connectCount, setConnectCount] = useState(0)
+    const [gameID, setGameID] = useState(-1);
+
     const history = useHistory();
 
 
     function newGame() {
-        socket.emit(ClientServerTypes.NEW_GAME)
+        if (connectCount >= 1){
+            socket.close()
+            toast.error("Connection to the server failed. Try later again and refresh the webpage", { "duration": 5000 });
+        }else{
+            socket.emit(ClientServerTypes.NEW_GAME)
+        }
+    }
+
+    function joinGame(){
+        if (connectCount >= 1){
+            socket.close()
+            toast.error("Connection to the server failed. Try later again and refresh the webpage", { "duration": 5000 });
+        }
     }
 
     useEffect(() => {
@@ -34,7 +48,6 @@ export const JoinBox = () => {
         function errorHandler() {
             setConnectCount(connectCount + 1)
             if (connectCount === 1) {
-                toast.error("Connection to the server failed. Try later again and refresh the webpage", { "duration": 15000 });
                 socket.close();
             }
         }
@@ -69,7 +82,7 @@ export const JoinBox = () => {
             </div>
             <div className="join-box" style={{ marginTop: '5px' }}>
                 <form className="form-inline">
-                    <input type="number" className="form-control" id="gameID" placeholder={t("game identification")} maxLength={6} onChange={(e) => { }}>
+                    <input type="number" className="form-control" id="gameID" placeholder={t("game identification")} maxLength={10} onChange={(e) => { }}>
                     </input>
                     <button type="button" className="btn btn-primary" onClick={(e) => { }}>{t("join game")}</button>
                 </form>
