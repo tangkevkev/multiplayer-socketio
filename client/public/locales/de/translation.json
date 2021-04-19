@@ -5,5 +5,12 @@
     "play": "Spielen",
     "create private game": "Privates Spiel erstellen",
     "game identification": "Spiel ID",
-    "join game": "Spiel beitreten"
+    "join game": "Spiel beitreten",
+    "back to homepage": "Zur Hauptseite",
+    "error": "Fehler",
+    "news": "Neuigkeiten",
+    "about": "Allgemein",
+    "connection failed": "Verbindung zum Server fehlgeschlagen. Versuchen Sie es später nochmal und aktualisieren Sie die Website erneut",
+    "no name": "Geben Sie bitte einen Namen an",
+    "invalid id": "Ungültige Spiel ID"
 }

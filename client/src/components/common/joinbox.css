@@ -5,6 +5,7 @@
     padding-right: 10px;
     border: 1px solid #d3d3d3;
     background-color: #f8f8f8;
+    display: block;
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
@@ -15,9 +16,7 @@
 }
 
 .join-sub-box>button {
-    display: block;
     margin: auto;
-    margin: 1px
 }
 
 .form-inline {

@@ -5,6 +5,13 @@
     "play": "Play",
     "create private game": "Create Private Game",
     "game identification": "Game Identifier",
-    "join game": "Join Game"
+    "join game": "Join Game",
+    "back to homepage": "Back to Homepage",
+    "error": "Error",
+    "news": "News",
+    "about": "About",
+    "connection failed": "Connection to the server failed. Try later again and refresh the webpage",
+    "no name": "please enter an username",
+    "invalid id": "invalid game id"
 
 }

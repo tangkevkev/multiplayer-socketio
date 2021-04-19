@@ -6,6 +6,11 @@ import { SocketContext } from './context/socket'
 import { Socket } from "socket.io-client"
 import { ClientServerTypes, emptyMessage, ErrorType, Message } from './types'
 import toast, { Toaster } from 'react-hot-toast';
+import { useSelector } from "react-redux";
+import {
+      selectUsername
+} from '../redux/userSlice'
+
 
 
 import './Join.css'
@@ -15,6 +20,7 @@ interface JoinProps extends RouteComponentProps<{ id: string }> { }
 
 export const JoinComponent = (props: JoinProps) => {
     const { t, } = useTranslation();
+    const username = useSelector(selectUsername)
     const socket: Socket = useContext(SocketContext).getSocket()
     const [connectCount, setConnectCount] = useState(0)
 
@@ -23,6 +29,10 @@ export const JoinComponent = (props: JoinProps) => {
     let id = props.match.params.id
 
     function joinGame(){
+        if(username.length === 0){
+            toast.error(String(t("no name")), { "duration": 2000 });
+            return;
+        }
         history.push({pathname:"/game/"+id})
     }
 
@@ -60,7 +70,7 @@ export const JoinComponent = (props: JoinProps) => {
             socket.off(ClientServerTypes.GAME_EXISTS, responseHandler)
             socket.off("connect_error", errorHandler);
         }
-    }, [socket, history, connectCount]);
+    }, [socket, history, connectCount,id]);
 
 
     return (

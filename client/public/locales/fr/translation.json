@@ -5,5 +5,13 @@
     "play": "Jouer",
     "create private game": "Créer une partie privée",
     "game identification": "Partie ID",
-    "join game": "Rejoindre la partie"
+    "join game": "Rejoindre la partie",
+    "back to homepage": "Retour à la page d'accueil",
+    "error": "Erreur",
+    "news": "Actualités",
+    "about": "Info",
+    "connection failed": "Cependant il n'est pas possible de se connecter au serveur. Essayez à nouveau plus tard et actualisez le site Web",
+    "no name": "Entrez un nom",
+    "invalid id": "La Partie ID est invalide"
+
 }

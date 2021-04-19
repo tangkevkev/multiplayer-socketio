@@ -4,38 +4,39 @@ export const ENDPOINT: string = "localhost:8080"
 /**
  * Messages exchanged between client/player and server
  */
-export enum ClientServerTypes{
-    NEW_GAME = "createGame",
-    DISCONNECT = "disconnect",
-    JOIN_GAME = "joinGame",
-    LEAVE_GAME = "leaveGame",
-    GAME_EXISTS = "gameExists",
-    CONNECT_ERROR = "connect_error"
+export const ClientServerTypes = {
+    NEW_GAME : "createGame",
+    DISCONNECT : "disconnect",
+    JOIN_GAME : "joinGame",
+    LEAVE_GAME : "leaveGame",
+    GAME_EXISTS : "gameExists",
+    CONNECT_ERROR : "connect_error"
 }
 
-export enum ErrorType{
-    NONE= "none",
-    NEW_GAME = "newGameFail",
-    JOIN_GAME = "joinGameFail",   
-    EXISTS_GAME = "existGameFail"
+export const ErrorType={
+    NONE: "none",
+    NEW_GAME:"newGameFail",
+    JOIN_GAME: "joinGameFail",   
+    EXISTS_GAME: "existGameFail"
 }
+type ErrorTypes = typeof ErrorType[keyof typeof ErrorType]
 
 /**
  * Messages exchanged directly between clients/players
  */
-export enum ClientClientTypes{
-    CHAT_MESSAGE = "message",
-    FOLD = "fold",
-    RAISE = "raise",
-    CHECK = "check",
-    SET_BALANCE = "setBalance",
-
+export const ClientClientTypes = {
+    NEW_PLAYER : "newPlayer",
+    CHAT_MESSAGE : "message",
+    FOLD : "fold",
+    RAISE : "raise",
+    CHECK : "check",
+    SET_BALANCE : "setBalance",
 }
 
 
 //Message interface
 export interface Message{
-    error: ErrorType,
+    error: ErrorTypes,
     errorMessage?: string,
     doReply?: boolean,
     payload:{

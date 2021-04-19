@@ -1,5 +1,5 @@
 import socketio, { Socket } from "socket.io"
-import { ClientServerTypes, ErrorType, Message, emptyMessage } from "./types"
+import { ClientServerTypes, ErrorType, Message, emptyMessage, ClientClientTypes } from "./types"
 /**
  * For each client, we create an instance of the class Connection.
  * @field 
@@ -14,6 +14,7 @@ export default class Connection {
     static CURRENT_GAMES_ID: Map<number, number> = new Map()
 
     private static MAX_PLAYERS = 10;
+
 
 
     /**
@@ -137,7 +138,7 @@ export default class Connection {
             Connection.CURRENT_GAMES_ID.set(game_id, Connection.CURRENT_GAMES_ID.get(game_id) + 1)
             response.payload.gameID = game_id.toString();
             this.game_id = game_id
-            this.game_socket.to(game_id.toString()).broadcast.emit(ClientServerTypes.JOIN_GAME, request)
+            this.game_socket.to(game_id.toString()).broadcast.emit(ClientClientTypes.NEW_PLAYER, request)
         } else {
             response.error = ErrorType.JOIN_GAME;
             response.errorMessage = "Game with " + game_id + " does not exist!"
@@ -168,9 +169,15 @@ export default class Connection {
         this.game_id = -1;
     }
 
-    private forward_message(args: any[]) {
-        console.log("forward message")
-        console.log(args)
+    private forward_message = (eventName: string, message: Message) => {
+        if (Object.values(ClientServerTypes).includes(eventName)) {
+            return
+        } else if (Object.values(ClientClientTypes).includes(eventName)){
+            console.log("Eventname: " + eventName)
+            this.game_socket.to(this.game_id.toString()).broadcast.emit(eventName, message)
+        }
+
+
     }
 
 
@@ -183,6 +190,7 @@ export default class Connection {
         
         Always: Deregister all listener
         */
+        this.leave_game();
 
         this.close_listener()
 
