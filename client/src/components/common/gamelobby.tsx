@@ -1,9 +1,11 @@
 import './gamelobby.css'
+import avatar from '../../assets/avatars'
 
 import { SocketContext } from './../context/socket'
 import { Socket } from "socket.io-client"
 import { useSelector, useDispatch } from "react-redux";
 import { Fragment, useEffect, useContext } from "react";
+import toast, { Toaster } from 'react-hot-toast';
 
 import {
     selectAvatar,
@@ -22,14 +24,19 @@ export const GameLobby = () => {
     const dispatch = useDispatch();
 
     const username = useSelector(selectUsername)
-    const avatar = useSelector(selectAvatar)
+    const avatarID = useSelector(selectAvatar)
+    const participants = useSelector(selectParticipants)
 
     useEffect(() => {
         function leaveGameHandler(response: Message) {
-            console.log("Leave game: " + response.payload.user?.username + ". " + response.payload.user?.id)
             let leaveID = response.payload.user?.id
+            let leavingParticipant: Participant | undefined = participants.find((p) => p.id === leaveID)
+            if (leavingParticipant) {
+                toast.error(leavingParticipant.name + " has left the game")
+            }
             dispatch(removeParticipant(leaveID))
         }
+
         function newPlayerHandler(response: Message) {
             if (!response.payload.user) {
                 return;
@@ -43,29 +50,46 @@ export const GameLobby = () => {
                 if (response.doReply) {
                     let replyMessage: Message = emptyMessage();
                     replyMessage.doReply = false;
-                    replyMessage.payload.user = { avatar: avatar, id: socket.id, username: username }
+                    replyMessage.payload.user = { avatar: avatarID, id: socket.id, username: username }
                     socket.emit(ClientClientTypes.NEW_PLAYER, replyMessage)
                 }
             }
         }
 
-        socket.on(ClientServerTypes.LEAVE_GAME, leaveGameHandler);
         socket.on(ClientClientTypes.NEW_PLAYER, newPlayerHandler);
+        socket.on(ClientServerTypes.LEAVE_GAME, leaveGameHandler);
 
         return () => {
-            socket.emit(ClientServerTypes.LEAVE_GAME)
             socket.off(ClientClientTypes.NEW_PLAYER, newPlayerHandler);
             socket.off(ClientServerTypes.LEAVE_GAME, leaveGameHandler);
+        }
+    }, [participants, avatarID, username, socket, dispatch])
+
+
+    useEffect(() => {
+        return () => {
+            socket.emit(ClientServerTypes.LEAVE_GAME)
             console.log("Clean up game")
         }
-    }, [socket, avatar, username, dispatch]
+    }, [socket]
     )
+
+
 
 
 
     return (
         <Fragment>
+            <Toaster></Toaster>
+            {participants.map((participant) => (
+                <div className="participant" key={participant.id}>
+                    <img alt='logo' className="img-thumbnail avatar-image " src={avatar[participant.avatar]} />
+                    <div>                        
+                         {participant.name}
+                    </div>
+                </div>
 
+            ))}
         </Fragment>
     );
 }

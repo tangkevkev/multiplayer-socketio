@@ -1,0 +1,7 @@
+.participant {
+    display: inline-block;
+    color: black;
+    text-align: center;
+    margin: auto;
+    margin-left: 5px;
+}

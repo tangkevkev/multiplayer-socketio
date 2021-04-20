@@ -13,7 +13,7 @@ export const HomeComponent = () => {
                 <div className="col-md-4" style={{ "padding": 0 }}>
                     <JoinBox />
                 </div>
-                <div className="col-lg-2"/>
+                <div className="col-md-2"/>
                 <div className="col-lg-2"/>
                 <div className="col-lg-4" style={{ "padding": 0 }}>
                     <InfoBox />
@@ -21,6 +21,7 @@ export const HomeComponent = () => {
                 <div className="col-lg-4" style={{ "padding": 0 }}>
                     <NewsBox />
                 </div>
+                <div className="col-lg-2"/>
             </div>
         </Fragment >
     );

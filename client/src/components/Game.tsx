@@ -42,7 +42,7 @@ export const GameComponent = (props: GameProps) => {
             console.log("Reponse: " + response.payload.user?.username + ". " + response.payload.user?.id)
             if (response.error !== ErrorType.NONE) {
                 history.push({ pathname: "/error/Server response -> " + response.errorMessage })
-            } 
+            }
         }
 
         function errorHandler() {
@@ -75,7 +75,15 @@ export const GameComponent = (props: GameProps) => {
 
     return (
         <Fragment>
-            <GameLobby/>
+            <div className="row">
+                <div className="col-md-2" />
+                <div className="col-md-6">
+                    <GameLobby />
+                </div>
+                <div className="col-md-2" />
+
+            </div>
+
         </Fragment>
     );
 }

@@ -14,6 +14,7 @@ export default class Connection {
     static CURRENT_GAMES_ID: Map<number, number> = new Map()
 
     private static MAX_PLAYERS = 10;
+    private static ServerTypes = Object.values(ClientServerTypes)
 
 
 
@@ -150,8 +151,9 @@ export default class Connection {
 
     private leave_game = () => {
         if (Connection.CURRENT_GAMES_ID.get(this.game_id)) {
-            console.log("Leave game");
             let numPlayer = Connection.CURRENT_GAMES_ID.get(this.game_id) - 1
+            console.log("Game id: " + this.game_id  +". had " + (numPlayer+1) +" players")
+
             if (numPlayer <= 0) {
                 Connection.CURRENT_GAMES_ID.delete(this.game_id)
             } else {
@@ -170,10 +172,11 @@ export default class Connection {
     }
 
     private forward_message = (eventName: string, message: Message) => {
-        if (Object.values(ClientServerTypes).includes(eventName)) {
+        if (Connection.ServerTypes.includes(eventName)) {
             return
         } else if (Object.values(ClientClientTypes).includes(eventName)){
-            console.log("Eventname: " + eventName)
+            //Preventing impersonations
+            message.payload.user.id = this.game_socket.id;
             this.game_socket.to(this.game_id.toString()).broadcast.emit(eventName, message)
         }
 
@@ -191,7 +194,6 @@ export default class Connection {
         Always: Deregister all listener
         */
         this.leave_game();
-
         this.close_listener()
 
     }
