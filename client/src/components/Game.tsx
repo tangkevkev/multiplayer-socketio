@@ -11,6 +11,7 @@ import {
     selectUsername
 } from '../redux/userSlice'
 import { GameLobby } from '../components/common/gamelobby'
+import { Chat } from "./common/chat";
 
 interface GameProps extends RouteComponentProps<{ id: string }> { }
 
@@ -81,7 +82,7 @@ export const GameComponent = (props: GameProps) => {
                     <GameLobby />
                 </div>
                 <div className="col-md-2" />
-
+                <Chat />
             </div>
 
         </Fragment>

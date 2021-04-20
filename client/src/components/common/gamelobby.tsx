@@ -74,10 +74,6 @@ export const GameLobby = () => {
     }, [socket]
     )
 
-
-
-
-
     return (
         <Fragment>
             <Toaster></Toaster>

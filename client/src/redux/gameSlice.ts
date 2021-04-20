@@ -8,10 +8,17 @@ export interface Participant{
     avatar: number;
 }
 
+export interface ChatMessage{
+    message: string,
+    author?: Participant,
+    date: string   
+}
+
 export const gameSlice = createSlice({
     name: 'game',
     initialState: {
         participants: [] as Participant[],
+        messages: [] as ChatMessage[],
     },
     reducers: {
         addParticipant: (state, action) => {
@@ -24,9 +31,19 @@ export const gameSlice = createSlice({
             console.log("Remove action: " + action)
              state.participants = state.participants.filter(participant => participant.id !== action.payload)
              console.log(state.participants)
-        }
+        },
+
+        addMessage:(state, action) => {
+            state.messages.push(action.payload)
+        },
+
+        resetState:(state) => {
+            state.participants = []
+            state.messages = []
+        }       
     }
 });
 
-export const {addParticipant, removeParticipant} = gameSlice.actions;
+export const {addParticipant, removeParticipant, addMessage} = gameSlice.actions;
 export const selectParticipants = (state: {game: {participants: Participant[] }}) => state.game.participants;
+export const selectMessages = (state: {game: {messages: ChatMessage[]}}) => state.game.messages
