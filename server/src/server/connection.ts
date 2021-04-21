@@ -103,7 +103,7 @@ export default class Connection {
             response.errorMessage = "Game max capacity reached";
         } else {
             let current_id = Connection.AVAILABLE_GAMES_ID.pop()
-            Connection.CURRENT_GAMES_ID.set(current_id, 1)
+            Connection.CURRENT_GAMES_ID.set(current_id, 0)
             response.error = ErrorType.NONE;
             response.payload.gameID = current_id.toString();
         }
@@ -115,7 +115,7 @@ export default class Connection {
         let game_id = Number(request.payload.gameID);
         let response: Message = emptyMessage();
 
-        if (Connection.CURRENT_GAMES_ID.get(game_id)) {
+        if (Connection.CURRENT_GAMES_ID.get(game_id) !== undefined) {
             if (Connection.CURRENT_GAMES_ID.get(game_id) >= Connection.MAX_PLAYERS) {
                 response.error = ErrorType.EXISTS_GAME
                 response.errorMessage = "Maximal amount of players reached for this game"
