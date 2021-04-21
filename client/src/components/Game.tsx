@@ -84,6 +84,7 @@ export const GameComponent = (props: GameProps) => {
                 <div className="col-md-2" />
                 <Chat />
             </div>
+            
 
         </Fragment>
     );

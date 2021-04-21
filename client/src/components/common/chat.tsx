@@ -52,9 +52,7 @@ export const Chat = () => {
     }, [participants, messages, dispatch, socket])
     return (
         <Fragment>
-           <Widget handleNewUserMessage={handleNewUserMessage}
-                title="Chat"
-                subtitle="" />
+          
         </Fragment>
     );
 
