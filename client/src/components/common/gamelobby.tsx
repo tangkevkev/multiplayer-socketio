@@ -69,7 +69,6 @@ export const GameLobby = () => {
     useEffect(() => {
         return () => {
             socket.emit(ClientServerTypes.LEAVE_GAME)
-            console.log("Clean up game")
         }
     }, [socket]
     )
@@ -77,15 +76,31 @@ export const GameLobby = () => {
     return (
         <Fragment>
             <Toaster></Toaster>
-            {participants.map((participant) => (
-                <div className="participant" key={participant.id}>
-                    <img alt='logo' className="img-thumbnail avatar-image " src={avatar[participant.avatar]} />
-                    <div>                        
-                         {participant.name}
-                    </div>
-                </div>
 
-            ))}
+            <div className="participant-box">
+                <h4><b>Player</b></h4>
+
+
+                <div className="participant-about">
+                    <div className="participant">
+                        <img alt='logo' className="img-thumbnail avatar-image " src={avatar[avatarID]} />
+                        <div>
+                            {username}
+                        </div>
+                    </div>
+
+                    {participants.map((participant) => (
+                        <div className="participant" key={participant.id}>
+                            <img alt='logo' className="img-thumbnail avatar-image " src={avatar[participant.avatar]} />
+                            <div>
+                                {participant.name}
+                            </div>
+                        </div>
+
+                    ))}
+                </div>
+            </div>
+
         </Fragment>
     );
 }

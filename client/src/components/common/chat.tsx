@@ -2,35 +2,32 @@ import { Fragment, useContext, useEffect } from 'react';
 import { SocketContext } from './../context/socket'
 import { Socket } from "socket.io-client"
 import { useSelector, useDispatch } from "react-redux";
-import {
-    selectUsername
-} from '../../redux/userSlice'
+
 import {
     addMessage, ChatMessage, Participant, selectMessages, selectParticipants
 } from '../../redux/gameSlice'
-import { ClientClientTypes, emptyMessage, Message } from '../types';
+import { ClientClientTypes, Message } from '../types';
 
 import './chat.css'
-import { Widget, addResponseMessage } from 'react-chat-widget';
 
 import 'react-chat-widget/lib/styles.css';
 
 export const Chat = () => {
     const socket: Socket = useContext(SocketContext).getSocket()
     const dispatch = useDispatch();
-    const username = useSelector(selectUsername)
+  //  const username = useSelector(selectUsername)
     const participants: Participant[] = useSelector(selectParticipants)
     const messages: ChatMessage[] = useSelector(selectMessages)
 
 
-    const handleNewUserMessage = (newMessage: string) => {
+    /**const handleNewUserMessage = (newMessage: string) => {
         let message: Message = emptyMessage();
         message.payload.message = newMessage;
         message.payload.user = { username: username, id: socket.id }
 
         socket.emit(ClientClientTypes.CHAT_MESSAGE, message)
 
-    }
+    }*/
 
     useEffect(() => {
         function messageHandler(response: Message) {
@@ -40,7 +37,6 @@ export const Chat = () => {
                 let newMessage: ChatMessage = { author: participant, date: date.toLocaleTimeString(), message: String(response.payload.message) }
                 dispatch(addMessage(newMessage))
 
-                addResponseMessage(participant.name + ": " + String(response.payload.message))
             }
         }
 

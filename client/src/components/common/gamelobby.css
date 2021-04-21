@@ -4,4 +4,38 @@
     text-align: center;
     margin: auto;
     margin-left: 5px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.participant-box {
+    text-align: center;
+    margin-top: 5vh;
+    background-color: #f8f8f8;
+    border: 1px solid #d3d2d2;
+    padding: 1vh;
+    border-radius: 2px;
+    border-radius: 10px;
+    margin: auto;
+    min-width: 300px;
+}
+
+.participant-about {
+    line-height: 1.5em;
+    margin-bottom: 2.5em;
+    text-align: justify;
+    font-family: verdana;
+    font-size: 0.8em;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #d3d2d2;
+    border-radius: 2px;
+    padding: 1vh;
+    margin: auto
+}
+
+@media screen and (max-width: 300px) {
+    .participant-box {
+        min-width: none;
+        margin: auto
+    }
 }
