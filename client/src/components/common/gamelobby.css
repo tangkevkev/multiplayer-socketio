@@ -3,21 +3,20 @@
     color: black;
     text-align: center;
     margin: auto;
-    margin-left: 5px;
     margin-left: auto;
     margin-right: auto;
 }
 
 .participant-box {
     text-align: center;
-    margin-top: 5vh;
+    margin-top: 1vh;
     background-color: #f8f8f8;
     border: 1px solid #d3d2d2;
     padding: 1vh;
     border-radius: 2px;
     border-radius: 10px;
     margin: auto;
-    min-width: 300px;
+    width: fit-content;
 }
 
 .participant-about {
@@ -30,12 +29,22 @@
     border: 1px solid #d3d2d2;
     border-radius: 2px;
     padding: 1vh;
+    min-width: 300px;
+    max-width: 500px;
+    min-height: 200px;
     margin: auto
+}
+
+@media screen and (min-width: 800px) {
+    .participant-box {
+        margin-left: unset;
+        margin-right: auto;
+    }
 }
 
 @media screen and (max-width: 300px) {
     .participant-box {
-        min-width: none;
+        width: fit-content;
         margin: auto
     }
 }

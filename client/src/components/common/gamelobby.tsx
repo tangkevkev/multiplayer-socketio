@@ -85,7 +85,7 @@ export const GameLobby = () => {
                     <div className="participant">
                         <img alt='logo' className="img-thumbnail avatar-image " src={avatar[avatarID]} />
                         <div>
-                            {username}
+                            <b style={{color:"red"}}> {username} </b>
                         </div>
                     </div>
 

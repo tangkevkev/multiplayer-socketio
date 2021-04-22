@@ -11,6 +11,7 @@ import {
     selectUsername
 } from '../redux/userSlice'
 import { GameLobby } from '../components/common/gamelobby'
+import { Invite } from '../components/common/invite'
 
 interface GameProps extends RouteComponentProps<{ id: string }> { }
 
@@ -76,9 +77,16 @@ export const GameComponent = (props: GameProps) => {
     return (
         <Fragment>
             <div className="row">
+                <div className="col-md-6">
+                    <Invite author={username} link={"http://localhost:3000/join/" + id} id={id} />
+                </div>
+                <div className="col-md-6">
                     <GameLobby />
+                </div>
             </div>
-            
+            <div className="row">
+            </div>
+
 
         </Fragment>
     );
