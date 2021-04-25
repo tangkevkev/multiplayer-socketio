@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import './App.css';
 import { HomeComponent } from './Home';
-import { GameComponent } from './Game';
+import { LobbyComponent } from './Lobby';
 import { JoinComponent } from './Join';
 import { ErrorComponent } from './Error';
 
@@ -23,7 +23,7 @@ export const App = () => {
         <SocketContext.Provider value={socketWrapper}>
           <Switch>
             <Route exact path="/" component={HomeComponent} />
-            <Route path="/game/:id" component={GameComponent} />
+            <Route path="/game/:id" component={LobbyComponent} />
             <Route path="/join/:id" component={JoinComponent} />
             <Route path="/error/:errorMessage" component={ErrorComponent}/>
             <Route path="*" component={ErrorComponent} />

@@ -10,12 +10,13 @@ import {
     selectAvatar,
     selectUsername
 } from '../redux/userSlice'
-import { GameLobby } from '../components/common/gamelobby'
-import { Invite } from '../components/common/invite'
+import { GameLobby } from './common/gamelobby'
+import { Invite } from './common/invite'
+import { Game } from "./game/game";
 
-interface GameProps extends RouteComponentProps<{ id: string }> { }
+interface LobbyProps extends RouteComponentProps<{ id: string }> { }
 
-export const GameComponent = (props: GameProps) => {
+export const LobbyComponent = (props: LobbyProps) => {
     const socket: Socket = useContext(SocketContext).getSocket()
     const [connectCount, setConnectCount] = useState(0)
 
@@ -84,10 +85,6 @@ export const GameComponent = (props: GameProps) => {
                     <GameLobby />
                 </div>
             </div>
-            <div className="row">
-            </div>
-
-
         </Fragment>
     );
 }
